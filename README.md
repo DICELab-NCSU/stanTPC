@@ -21,79 +21,59 @@ functions {
 ```
 
 #### Add parameters to the `model` block
-You will need to add the parameters of the model you want to use to the `model` block. The parameters are:
+You will need to add the parameters of the model you want to use to the `model` block. The models are:
 
-| Parameter | Typical interpretation                  |
-| :-------- | :-------------------------------------- |
-| `a`       | scale / intercept / rate constant       |
-| `b`       | shape / slope / curvature               |
-| `c`       | shape / location                        |
-| `d`       | shape / exponent                        |
-| `rmax`    | maximum rate                            |
-| `tmin`    | lower thermal limit                     |
-| `tmax`    | upper thermal limit                     |
-| `topt`    | optimum temperature                     |
-| `e`       | activation energy                       |
-| `el`      | low-temp inactivation energy            |
-| `eh`      | high-temp inactivation energy           |
-| `tl`      | low-temp inactivation temperature       |
-| `th`      | high-temp inactivation temperature      |
-| `tref`    | reference temperature                   |
-| `b0`      | baseline rate                           |
-
-The models are:
-
-| Model                         | Parameters                      | Handles negative rate |
-| :---------------------------- | :------------------------------ | :-------------------- |
-| analytiskontodimas_2004       | a, tmin, tmax                   |      ✔️ Yes           |
-| ashrafi1_2018                 | a, b, c                         |      ✔️ Yes           |
-| ashrafi2_2018                 | a, b, c                         |      ✔️ Yes           |
-| ashrafi3_2018                 | a, b, c                         |      ✔️ Yes           |
-| ashrafi4_2018                 | a, b, c                         |      ✔️ Yes           |
-| ashrafi5_2018                 | a, b, c                         |      ✔️ Yes           |
-| atkin_2005                    | a, b, c                         |      ✔️ Yes           |
-| beta_2012                     | rmax, tmin, tmax, a, b          |       ❌ No           |
-| betatypesimplified_2008       | rmax, tmin, tmax                |       ❌ No           |
-| boatman_2017                  | a, b, c                         |      ✔️ Yes           |
-| briere1_1999                  | a, tmin, tmax                   |       ❌ No           |
-| briere1simplified_1999        | a, tmin, tmax                   |       ❌ No           |
-| briere2_1999                  | a, tmin, tmax, b                |       ❌ No           |
-| briere2simplified_1999        | a, tmin, tmax, b                |       ❌ No           |
-| briereextended_2021           | a, tmin, tmax, b, c             |       ❌ No           |
-| briereextendedsimplified_2021 | a, tmin, tmax, b, c             |       ❌ No           |
-| delong_2017                   | b0, e, eh, th                   |       ❌ No           |
-| deutsch_2008                  | a, b, c, d                      |      ✔️ Yes           |
-| eubank_1973                   | a, b, c                         |      ✔️ Yes           |
-| flextpc_2024                  | a, b, c, d                      |      ✔️ Yes           |
-| flinn_1991                    | a, b                            |       ❌ No           |
-| gaussian_1987                 | rmax, topt, a                   |       ❌ No           |
-| gaussianmodified_2006         | rmax, topt, a, b                |       ❌ No           |
-| hinshelwood_1947              | a, e                            |       ❌ No           |
-| janisch1_1925                 | a, b                            |      ✔️ Yes           |
-| janisch2_1925                 | a, b, c                         |      ✔️ Yes           |
-| joehnk_2008                   | a, b, c                         |      ✔️ Yes           |
-| johnsonlewin_1946             | a, b, c                         |       ❌ No           |
-| kamykowski_1985               | a, b, c                         |      ✔️ Yes           |
-| lactin2_1995                  | a, b, tmax, d                   |       ❌ No           |
-| lobry_1991                    | rmax, tmin, tmax                |       ❌ No           |
-| mitchell_2009                 | a, b, c                         |       ❌ No           |
-| oneill_1972                   | a, b, c                         |      ✔️ Yes           |
-| pawar_2018                    | a, b, c                         |      ✔️ Yes           |
-| quadratic_2008                | a, b, c                         |      ✔️ Yes           |
-| ratkowsky_1983                | a, tmin, tmax                   |       ❌ No           |
-| rezende_2019                  | a, b, c                         |       ❌ No           |
-| rosso_1993                    | rmax, tmin, topt, tmax          |       ❌ No           |
-| sharpeschoolfull_1981         | r_tref, e, el, eh, tl, th, tref |       ❌ No           |
-| sharpeschoolhigh_1981         | r_tref, e, eh, th, tref         |       ❌ No           |
-| sharpeschoollow_1981          | r_tref, e, el, tl, tref         |       ❌ No           |
-| spain_1982                    | a, b, c                         |      ✔️ Yes           |
-| stinner_1974                  | a, b, c                         |      ✔️ Yes           |
-| taylorsexton_1972             | a, b, c                         |      ✔️ Yes           |
-| thomas_2012                   | a, b, c                         |      ✔️ Yes           |
-| thomas_2017                   | a, b, c                         |      ✔️ Yes           |
-| tomlinsonphillips_2015        | a, b, c                         |       ❌ No           |
-| warrendreyer_2006             | a, b, c                         |       ❌ No           |
-| weibull_1995                  | a, b, c                         |       ❌ No           |
+| Model                         | Parameters                      | Negative low | Negative high |
+| :---------------------------- | :------------------------------ | :----------- | :------------ |
+| analytiskontodimas_2004       | a, tmin, tmax                   | no           | no            |
+| ashrafi1_2018                 | a, b, c                         | yes          | no            |
+| ashrafi2_2018                 | a, b, c                         | yes          | yes           |
+| ashrafi3_2018                 | a, b, c                         | no           | no            |
+| ashrafi4_2018                 | a, b, c, d                      | yes          | yes           |
+| ashrafi5_2018                 | a, b, c, d                      | yes          | yes           |
+| atkin_2005                    | r0, a, b                        | no           | no            |
+| beta_2012                     | a, b, c, d, e                   | no           | no            |
+| betatypesimplified_2008       | rho, alpha, beta                | no           | yes           |
+| boatman_2017                  | rmax, tmin, tmax, a, b          | no           | no            |
+| briere1_1999                  | tmin, tmax, a                   | no           | no            |
+| briere1simplified_1999        | tmin, tmax, a                   | yes          | no            |
+| briere2_1999                  | tmin, tmax, a, b                | yes          | no            |
+| briere2simplified_1999        | tmin, tmax, a, b                | yes          | no            |
+| briereextended_2021           | tmin, tmax, a, b, d             | no           | no            |
+| briereextendedsimplified_2021 | tmin, tmax, a, b, d             | no           | no            |
+| delong_2017                   | c, eb, ef, tm, ehc              | no           | no            |
+| deutsch_2008                  | rmax, topt, ctmax, a            | no           | yes           |
+| eubank_1973                   | topt, a, b                      | no           | no            |
+| flextpc_2024                  | tmin, tmax, rmax, alpha, beta   | no           | no            |
+| flinn_1991                    | a, b, c                         | no           | no            |
+| gaussian_1987                 | rmax, topt, a                   | no           | no            |
+| gaussianmodified_2006         | rmax, topt, a, b                | no           | no            |
+| hinshelwood_1947              | a, e, b, eh                     | no           | yes           |
+| janisch1_1925                 | m, a, topt                      | no           | no            |
+| janisch2_1925                 | m, a, b, topt                   | no           | no            |
+| joehnk_2008                   | rmax, topt, a, b, c             | yes          | yes           |
+| johnsonlewin_1946             | r0, e, eh, topt                 | no           | no            |
+| kamykowski_1985               | tmin, tmax, a, b, c             | yes          | yes           |
+| lactin2_1995                  | a, b, tmax, delta_t             | yes          | yes           |
+| lobry_1991                    | rmax, topt, tmin, tmax          | no           | no            |
+| mitchell_2009                 | topt, a, b                      | no           | no            |
+| oneill_1972                   | rmax, ctmax, topt, q10          | no           | no            |
+| pawar_2018                    | r_tref, e, eh, topt, tref       | no           | no            |
+| quadratic_2008                | a, b, c                         | yes          | yes           |
+| ratkowsky_1983                | tmin, tmax, a, b                | no           | no            |
+| rezende_2019                  | q10, a, b, c                    | no           | yes           |
+| rosso_1993                    | rmax, topt, tmin, tmax          | no           | yes           |
+| sharpeschoolfull_1981         | r_tref, e, el, tl, eh, th, tref | no           | no            |
+| sharpeschoolhigh_1981         | r_tref, e, eh, th, tref         | no           | no            |
+| sharpeschoollow_1981          | r_tref, e, el, tl, tref         | no           | no            |
+| spain_1982                    | a, b, c, r0                     | no           | yes           |
+| stinner_1974                  | rmax, topt, a, b                | no           | no            |
+| taylorsexton_1972             | rmax, tmin, topt                | no           | yes           |
+| thomas_2012                   | a, b, c, tref                   | yes          | yes           |
+| thomas_2017                   | a, b, c, d, e                   | yes          | yes           |
+| tomlinsonphillips_2015        | a, b, c                         | no           | yes           |
+| warrendreyer_2006             | rmax, topt, a                   | no           | no            |
+| weibull_1995                  | a, topt, b, c                   | no           | no            |
 
 ### Contributing
 Please consider opening an issue to add new thermal performance curve models, both here and for [rTPC](https://github.com/padpadpadpad/rTPC/issues).
