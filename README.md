@@ -43,57 +43,57 @@ You will need to add the parameters of the model you want to use to the `model` 
 
 The models are:
 
-| Model                         | Parameters                      |
-|:------------------------------|:--------------------------------|
-| analytiskontodimas_2004       | a, tmin, tmax                   |
-| ashrafi1_2018                 | a, b, c                         |
-| ashrafi2_2018                 | a, b, c                         |
-| ashrafi3_2018                 | a, b, c                         |
-| ashrafi4_2018                 | a, b, c                         |
-| ashrafi5_2018                 | a, b, c                         |
-| atkin_2005                    | a, b, c                         |
-| beta_2012                     | rmax, tmin, tmax, a, b          |
-| betatypesimplified_2008       | rmax, tmin, tmax                |
-| boatman_2017                  | a, b, c                         |
-| briere1_1999                  | a, tmin, tmax                   |
-| briere1simplified_1999        | a, tmin, tmax                   |
-| briere2_1999                  | a, tmin, tmax, b                |
-| briere2simplified_1999        | a, tmin, tmax, b                |
-| briereextended_2021           | a, tmin, tmax, b, c             |
-| briereextendedsimplified_2021 | a, tmin, tmax, b, c             |
-| delong_2017                   | b0, e, eh, th                   |
-| deutsch_2008                  | a, b, c, d                      |
-| eubank_1973                   | a, b, c                         |
-| flextpc_2024                  | a, b, c, d                      |
-| flinn_1991                    | a, b                            |
-| gaussian_1987                 | rmax, topt, a                   |
-| gaussianmodified_2006         | rmax, topt, a, b                |
-| hinshelwood_1947              | a, e                            |
-| janisch1_1925                 | a, b                            |
-| janisch2_1925                 | a, b, c                         |
-| joehnk_2008                   | a, b, c                         |
-| johnsonlewin_1946             | a, b, c                         |
-| kamykowski_1985               | a, b, c                         |
-| lactin2_1995                  | a, b, tmax, d                   |
-| lobry_1991                    | rmax, tmin, tmax                |
-| mitchell_2009                 | a, b, c                         |
-| oneill_1972                   | a, b, c                         |
-| pawar_2018                    | a, b, c                         |
-| quadratic_2008                | a, b, c                         |
-| ratkowsky_1983                | a, tmin, tmax                   |
-| rezende_2019                  | a, b, c                         |
-| rosso_1993                    | rmax, tmin, topt, tmax          |
-| sharpeschoolfull_1981         | r_tref, e, el, eh, tl, th, tref |
-| sharpeschoolhigh_1981         | r_tref, e, eh, th, tref         |
-| sharpeschoollow_1981          | r_tref, e, el, tl, tref         |
-| spain_1982                    | a, b, c                         |
-| stinner_1974                  | a, b, c                         |
-| taylorsexton_1972             | a, b, c                         |
-| thomas_2012                   | a, b, c                         |
-| thomas_2017                   | a, b, c                         |
-| tomlinsonphillips_2015        | a, b, c                         |
-| warrendreyer_2006             | a, b, c                         |
-| weibull_1995                  | a, b, c                         |
+| Model                         | Parameters                      | Handles negative rate |
+| :---------------------------- | :------------------------------ | :-------------------- |
+| analytiskontodimas_2004       | a, tmin, tmax                   |      ✔️ Yes           |
+| ashrafi1_2018                 | a, b, c                         |      ✔️ Yes           |
+| ashrafi2_2018                 | a, b, c                         |      ✔️ Yes           |
+| ashrafi3_2018                 | a, b, c                         |      ✔️ Yes           |
+| ashrafi4_2018                 | a, b, c                         |      ✔️ Yes           |
+| ashrafi5_2018                 | a, b, c                         |      ✔️ Yes           |
+| atkin_2005                    | a, b, c                         |      ✔️ Yes           |
+| beta_2012                     | rmax, tmin, tmax, a, b          |       ❌ No           |
+| betatypesimplified_2008       | rmax, tmin, tmax                |       ❌ No           |
+| boatman_2017                  | a, b, c                         |      ✔️ Yes           |
+| briere1_1999                  | a, tmin, tmax                   |       ❌ No           |
+| briere1simplified_1999        | a, tmin, tmax                   |       ❌ No           |
+| briere2_1999                  | a, tmin, tmax, b                |       ❌ No           |
+| briere2simplified_1999        | a, tmin, tmax, b                |       ❌ No           |
+| briereextended_2021           | a, tmin, tmax, b, c             |       ❌ No           |
+| briereextendedsimplified_2021 | a, tmin, tmax, b, c             |       ❌ No           |
+| delong_2017                   | b0, e, eh, th                   |       ❌ No           |
+| deutsch_2008                  | a, b, c, d                      |      ✔️ Yes           |
+| eubank_1973                   | a, b, c                         |      ✔️ Yes           |
+| flextpc_2024                  | a, b, c, d                      |      ✔️ Yes           |
+| flinn_1991                    | a, b                            |       ❌ No           |
+| gaussian_1987                 | rmax, topt, a                   |       ❌ No           |
+| gaussianmodified_2006         | rmax, topt, a, b                |       ❌ No           |
+| hinshelwood_1947              | a, e                            |       ❌ No           |
+| janisch1_1925                 | a, b                            |      ✔️ Yes           |
+| janisch2_1925                 | a, b, c                         |      ✔️ Yes           |
+| joehnk_2008                   | a, b, c                         |      ✔️ Yes           |
+| johnsonlewin_1946             | a, b, c                         |       ❌ No           |
+| kamykowski_1985               | a, b, c                         |      ✔️ Yes           |
+| lactin2_1995                  | a, b, tmax, d                   |       ❌ No           |
+| lobry_1991                    | rmax, tmin, tmax                |       ❌ No           |
+| mitchell_2009                 | a, b, c                         |       ❌ No           |
+| oneill_1972                   | a, b, c                         |      ✔️ Yes           |
+| pawar_2018                    | a, b, c                         |      ✔️ Yes           |
+| quadratic_2008                | a, b, c                         |      ✔️ Yes           |
+| ratkowsky_1983                | a, tmin, tmax                   |       ❌ No           |
+| rezende_2019                  | a, b, c                         |       ❌ No           |
+| rosso_1993                    | rmax, tmin, topt, tmax          |       ❌ No           |
+| sharpeschoolfull_1981         | r_tref, e, el, eh, tl, th, tref |       ❌ No           |
+| sharpeschoolhigh_1981         | r_tref, e, eh, th, tref         |       ❌ No           |
+| sharpeschoollow_1981          | r_tref, e, el, tl, tref         |       ❌ No           |
+| spain_1982                    | a, b, c                         |      ✔️ Yes           |
+| stinner_1974                  | a, b, c                         |      ✔️ Yes           |
+| taylorsexton_1972             | a, b, c                         |      ✔️ Yes           |
+| thomas_2012                   | a, b, c                         |      ✔️ Yes           |
+| thomas_2017                   | a, b, c                         |      ✔️ Yes           |
+| tomlinsonphillips_2015        | a, b, c                         |       ❌ No           |
+| warrendreyer_2006             | a, b, c                         |       ❌ No           |
+| weibull_1995                  | a, b, c                         |       ❌ No           |
 
 ### Contributing
 Please consider opening an issue to add new thermal performance curve models, both here and for [rTPC](https://github.com/padpadpadpad/rTPC/issues).
