@@ -1,0 +1,327 @@
+// -------------------------------------------------
+// Utility
+// -------------------------------------------------
+real clamp_pos(real x) {
+  return fmax(x, 1e-12);
+}
+
+// -------------------------------------------------
+// Analytis–Kontodimas (2004)
+// -------------------------------------------------
+real analytiskontodimas_2004(real temp, real a, real b, real c, real d) {
+  return a * pow(temp, b) * pow(1 - exp(c - d * temp), 1);
+}
+
+// -------------------------------------------------
+// Ashrafi models (2018)
+// -------------------------------------------------
+real ashrafi1_2018(real temp, real a, real b, real c) {
+  return a * exp(-b * square(temp - c));
+}
+
+real ashrafi2_2018(real temp, real a, real b, real c) {
+  return a * exp(-b * fabs(temp - c));
+}
+
+real ashrafi3_2018(real temp, real a, real b, real c) {
+  return a / (1 + exp(b * (temp - c)));
+}
+
+real ashrafi4_2018(real temp, real a, real b, real c) {
+  return a * exp(-b * pow(temp - c, 4));
+}
+
+real ashrafi5_2018(real temp, real a, real b, real c) {
+  return a * exp(-b * pow(fabs(temp - c), 3));
+}
+
+// -------------------------------------------------
+// Atkin (2005)
+// -------------------------------------------------
+real atkin_2005(real temp, real a, real b, real c) {
+  return a * exp(b * temp) / (1 + exp(c * temp));
+}
+
+// -------------------------------------------------
+// Beta family
+// -------------------------------------------------
+real beta_2012(real temp, real rmax, real tmin, real tmax, real a, real b) {
+  real x = (temp - tmin) / (tmax - tmin);
+  return rmax * pow(x, a) * pow(1 - x, b);
+}
+
+real betatypesimplified_2008(real temp, real rmax, real tmin, real tmax) {
+  real x = (temp - tmin) / (tmax - tmin);
+  return rmax * x * (1 - x);
+}
+
+// -------------------------------------------------
+// Boatman (2017)
+// -------------------------------------------------
+real boatman_2017(real temp, real a, real b, real c) {
+  return a * exp(b * temp - c * square(temp));
+}
+
+// -------------------------------------------------
+// Brière models
+// -------------------------------------------------
+real briere1_1999(real temp, real a, real tmin, real tmax) {
+  return a * temp * (temp - tmin) * sqrt(tmax - temp);
+}
+
+real briere1simplified_1999(real temp, real a, real tmin, real tmax) {
+  return a * (temp - tmin) * sqrt(tmax - temp);
+}
+
+real briere2_1999(real temp, real a, real tmin, real tmax, real b) {
+  return a * temp * (temp - tmin) * pow(tmax - temp, 1 / b);
+}
+
+real briere2simplified_1999(real temp, real a, real tmin, real tmax, real b) {
+  return a * (temp - tmin) * pow(tmax - temp, 1 / b);
+}
+
+real briereextended_2021(real temp, real a, real tmin, real tmax, real b, real c) {
+  return a * temp * pow(temp - tmin, b) * pow(tmax - temp, c);
+}
+
+real briereextendedsimplified_2021(real temp, real a, real tmin, real tmax, real b, real c) {
+  return a * pow(temp - tmin, b) * pow(tmax - temp, c);
+}
+
+// -------------------------------------------------
+// DeLong (2017)
+// -------------------------------------------------
+real delong_2017(real temp, real b0, real e, real eh, real th) {
+  real k = 8.617e-05;
+  real tk = temp + 273.15;
+  return b0 * exp(-e / (k * tk)) /
+  (1 + exp(eh / k * (1 / th - 1 / tk)));
+}
+
+// -------------------------------------------------
+// Deutsch (2008)
+// -------------------------------------------------
+real deutsch_2008(real temp, real a, real b, real c, real d) {
+  return a * exp(-b * square(temp - c)) * (1 - exp(d * (temp - c)));
+}
+
+// -------------------------------------------------
+// Eubank (1973)
+// -------------------------------------------------
+real eubank_1973(real temp, real a, real b, real c) {
+  return a + b * temp + c * square(temp);
+}
+
+// -------------------------------------------------
+// flexTPC (2024)
+// -------------------------------------------------
+real flextpc_2024(real temp, real a, real b, real c, real d) {
+  return a * exp(-b * pow(fabs(temp - c), d));
+}
+
+// -------------------------------------------------
+// Flinn (1991)
+// -------------------------------------------------
+real flinn_1991(real temp, real a, real b) {
+  return a * exp(-b / temp);
+}
+
+// -------------------------------------------------
+// Gaussian family
+// -------------------------------------------------
+real gaussian_1987(real temp, real rmax, real topt, real a) {
+  return rmax * exp(-0.5 * square((temp - topt) / a));
+}
+
+real gaussianmodified_2006(real temp, real rmax, real topt, real a, real b) {
+  return rmax * exp(-pow(fabs(temp - topt) / a, b));
+}
+
+// -------------------------------------------------
+// Hinshelwood (1947)
+// -------------------------------------------------
+real hinshelwood_1947(real temp, real a, real e) {
+  real k = 8.617e-05;
+  return a * exp(-e / (k * (temp + 273.15)));
+}
+
+// -------------------------------------------------
+// Janisch models
+// -------------------------------------------------
+real janisch1_1925(real temp, real a, real b) {
+  return a * exp(b * temp);
+}
+
+real janisch2_1925(real temp, real a, real b, real c) {
+  return a * exp(b * temp - c * square(temp));
+}
+
+// -------------------------------------------------
+// Jöhnk (2008)
+// -------------------------------------------------
+real joehnk_2008(real temp, real a, real b, real c) {
+  return a * exp(b * temp) * (1 - exp(c * temp));
+}
+
+// -------------------------------------------------
+// Johnson–Lewin (1946)
+// -------------------------------------------------
+real johnsonlewin_1946(real temp, real a, real b, real c) {
+  return a * exp(b * temp) / (1 + exp(c * temp));
+}
+
+// -------------------------------------------------
+// Kamykowski (1985)
+// -------------------------------------------------
+real kamykowski_1985(real temp, real a, real b, real c) {
+  return a * exp(b * temp - c * square(temp));
+}
+
+// -------------------------------------------------
+// Lactin2 (1995)
+// -------------------------------------------------
+real lactin2_1995(real temp, real a, real b, real tmax, real d) {
+  return a * exp(b * temp) - exp(b * tmax - (tmax - temp) / d);
+}
+
+// -------------------------------------------------
+// Lobry (1991)
+// -------------------------------------------------
+real lobry_1991(real temp, real rmax, real tmin, real tmax) {
+  real x = (temp - tmin) / (tmax - tmin);
+  return rmax * x * exp(1 - x);
+}
+
+// -------------------------------------------------
+// Mitchell–Angilletta (2009)
+// -------------------------------------------------
+real mitchell_2009(real temp, real a, real b, real c) {
+  return a * exp(-b / (temp + c));
+}
+
+// -------------------------------------------------
+// O'Neill (1972)
+// -------------------------------------------------
+real oneill_1972(real temp, real a, real b, real c) {
+  return a * exp(-b * fabs(temp - c));
+}
+
+// -------------------------------------------------
+// Pawar (2018)
+// -------------------------------------------------
+real pawar_2018(real temp, real a, real b, real c) {
+  return a * exp(-b * square(temp - c));
+}
+
+// -------------------------------------------------
+// Quadratic (2008)
+// -------------------------------------------------
+real quadratic_2008(real temp, real a, real b, real c) {
+  return a + b * temp + c * square(temp);
+}
+
+// -------------------------------------------------
+// Ratkowsky (1983)
+// -------------------------------------------------
+real ratkowsky_1983(real temp, real a, real tmin, real tmax) {
+  return square(a * (temp - tmin)) * square(1 - exp(0.1 * (temp - tmax)));
+}
+
+// -------------------------------------------------
+// Rezende (2019)
+// -------------------------------------------------
+real rezende_2019(real temp, real a, real b, real c) {
+  return a * exp(b * temp) / (1 + exp(c * temp));
+}
+
+// -------------------------------------------------
+// Rosso (1993)
+// -------------------------------------------------
+real rosso_1993(real temp, real rmax, real tmin, real topt, real tmax) {
+  real num = (temp - tmax) * square(temp - tmin);
+  real den = (topt - tmin) * ((topt - tmin) * (temp - topt) -
+  (topt - tmax) * (topt + tmin - 2 * temp));
+  return rmax * num / den;
+}
+
+// -------------------------------------------------
+// Sharpe–Schoolfield
+// -------------------------------------------------
+real sharpeschoolfull_1981(real temp, real r_tref, real e, real el, real eh,
+real tl, real th, real tref) {
+  real k = 8.617e-05;
+  real tk = temp + 273.15;
+  real trefk = tref + 273.15;
+  return r_tref * exp(-e / k * (1 / tk - 1 / trefk)) /
+  (1 + exp(el / k * (1 / tl - 1 / tk)) + exp(eh / k * (1 / th - 1 / tk)));
+}
+
+real sharpeschoolhigh_1981(real temp, real r_tref, real e, real eh, real th, real tref) {
+  real k = 8.617e-05;
+  real tk = temp + 273.15;
+  real trefk = tref + 273.15;
+  return r_tref * exp(-e / k * (1 / tk - 1 / trefk)) /
+  (1 + exp(eh / k * (1 / th - 1 / tk)));
+}
+
+real sharpeschoollow_1981(real temp, real r_tref, real e, real el, real tl, real tref) {
+  real k = 8.617e-05;
+  real tk = temp + 273.15;
+  real trefk = tref + 273.15;
+  return r_tref * exp(-e / k * (1 / tk - 1 / trefk)) /
+  (1 + exp(el / k * (1 / tl - 1 / tk)));
+}
+
+// -------------------------------------------------
+// Spain (1982)
+// -------------------------------------------------
+real spain_1982(real temp, real a, real b, real c) {
+  return a * exp(b * temp - c * square(temp));
+}
+
+// -------------------------------------------------
+// Stinner (1974)
+// -------------------------------------------------
+real stinner_1974(real temp, real a, real b, real c) {
+  return a * exp(b * temp) * (1 - exp(c * temp));
+}
+
+// -------------------------------------------------
+// Taylor–Sexton (1972)
+// -------------------------------------------------
+real taylorsexton_1972(real temp, real a, real b, real c) {
+  return a * exp(b * temp - c / temp);
+}
+
+// -------------------------------------------------
+// Thomas models
+// -------------------------------------------------
+real thomas_2012(real temp, real a, real b, real c) {
+  return a * exp(-b * fabs(temp - c));
+}
+
+real thomas_2017(real temp, real a, real b, real c) {
+  return a * exp(-b * square(temp - c));
+}
+
+// -------------------------------------------------
+// Tomlinson–Phillips (2015)
+// -------------------------------------------------
+real tomlinsonphillips_2015(real temp, real a, real b, real c) {
+  return a * exp(b * temp) / (1 + exp(c * (temp - b)));
+}
+
+// -------------------------------------------------
+// Warren–Dreyer (2006)
+// -------------------------------------------------
+real warrendreyer_2006(real temp, real a, real b, real c) {
+  return a * exp(-b / (temp + c));
+}
+
+// -------------------------------------------------
+// Weibull (1995)
+// -------------------------------------------------
+real weibull_1995(real temp, real a, real b, real c) {
+  return a * (b / c) * pow(temp / c, b - 1) * exp(-pow(temp / c, b));
+}
