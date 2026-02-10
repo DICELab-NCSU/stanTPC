@@ -356,10 +356,33 @@ display: none;
 <h1>stanTPC: Thermal performance curves in Stan</h1>
 <!-- badges: start -->
 <p><a href="https://www.gnu.org/licenses/gpl-3.0"><img role="img" aria-label="License: GPL v3" src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5NiIgaGVpZ2h0PSIyMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJMaWNlbnNlOiBHUEx2MyI+PHRpdGxlPkxpY2Vuc2U6IEdQTHYzPC90aXRsZT48bGluZWFyR3JhZGllbnQgaWQ9InMiIHgyPSIwIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYmJiIiBzdG9wLW9wYWNpdHk9Ii4xIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLW9wYWNpdHk9Ii4xIi8+PC9saW5lYXJHcmFkaWVudD48Y2xpcFBhdGggaWQ9InIiPjxyZWN0IHdpZHRoPSI5NiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNmZmYiLz48L2NsaXBQYXRoPjxnIGNsaXAtcGF0aD0idXJsKCNyKSI+PHJlY3Qgd2lkdGg9IjUxIiBoZWlnaHQ9IjIwIiBmaWxsPSIjNTU1Ii8+PHJlY3QgeD0iNTEiIHdpZHRoPSI0NSIgaGVpZ2h0PSIyMCIgZmlsbD0iIzAwN2VjNiIvPjxyZWN0IHdpZHRoPSI5NiIgaGVpZ2h0PSIyMCIgZmlsbD0idXJsKCNzKSIvPjwvZz48ZyBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iVmVyZGFuYSxHZW5ldmEsRGVqYVZ1IFNhbnMsc2Fucy1zZXJpZiIgdGV4dC1yZW5kZXJpbmc9Imdlb21ldHJpY1ByZWNpc2lvbiIgZm9udC1zaXplPSIxMTAiPjx0ZXh0IGFyaWEtaGlkZGVuPSJ0cnVlIiB4PSIyNjUiIHk9IjE1MCIgZmlsbD0iIzAxMDEwMSIgZmlsbC1vcGFjaXR5PSIuMyIgdHJhbnNmb3JtPSJzY2FsZSguMSkiIHRleHRMZW5ndGg9IjQxMCI+TGljZW5zZTwvdGV4dD48dGV4dCB4PSIyNjUiIHk9IjE0MCIgdHJhbnNmb3JtPSJzY2FsZSguMSkiIGZpbGw9IiNmZmYiIHRleHRMZW5ndGg9IjQxMCI+TGljZW5zZTwvdGV4dD48dGV4dCBhcmlhLWhpZGRlbj0idHJ1ZSIgeD0iNzI1IiB5PSIxNTAiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiIHRyYW5zZm9ybT0ic2NhbGUoLjEpIiB0ZXh0TGVuZ3RoPSIzNTAiPkdQTHYzPC90ZXh0Pjx0ZXh0IHg9IjcyNSIgeT0iMTQwIiB0cmFuc2Zvcm09InNjYWxlKC4xKSIgZmlsbD0iI2ZmZiIgdGV4dExlbmd0aD0iMzUwIj5HUEx2MzwvdGV4dD48L2c+PC9zdmc+" alt="License: GPL v3" /></a> <!-- badges: end --></p>
-<p><code>stanTPC</code> provides a library of Stan functions for fitting
-thermal performance curve models to data. These functions follow the
-nomenclature and notation of the <a href="https://padpadpadpad.github.io/rTPC/">rTPC</a> to aid users
-familiar with that package.</p>
+<p><code>stanTPC</code> provides a Stan translation of <a href="https://padpadpadpad.github.io/rTPC/">rTPC</a> for functions for
+fitting thermal performance curves to data.</p>
+<div id="how-to-use" class="section level3">
+<h3>How to use</h3>
+<p>Copy the file <code>tpc-models.stanfunctions</code> to the directory
+containing the <code>.stan</code> file that will fit a thermal
+performance curve. In the functions block, insert the following:</p>
+<pre><code>functions {
+  ...
+  #include tpc-models.stanfunctions
+  ...
+}</code></pre>
+</div>
+<div id="contributing" class="section level3">
+<h3>Contributing</h3>
+<p>Please consider opening an issue to add new thermal performance curve
+models, both here and for <a href="https://github.com/padpadpadpad/rTPC/issues">rTPC</a>.</p>
+</div>
+<div id="citation" class="section level3">
+<h3>Citation</h3>
+<p>If you use these functions, please cite the authors of the rTPC
+package:</p>
+<blockquote>
+<p>Padfield D, O’Sullivan H, Windram F (2024). rTPC: Fitting and
+Analysing Thermal Performance Curves. R package version 1.0.7, <a href="https://padpadpadpad.github.io/rTPC/" class="uri">https://padpadpadpad.github.io/rTPC/</a>, <a href="https://github.com/padpadpadpad/rTPC" class="uri">https://github.com/padpadpadpad/rTPC</a></p>
+</blockquote>
+</div>
 </div>
 
 
